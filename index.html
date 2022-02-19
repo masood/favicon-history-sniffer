@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <!-- <link rel="icon" href="/public/favicon.ico" type="image/x-icon"> -->
+  </head>
+
+  <body>
+    <script>
+      async function changeFavicon () {
+        favicon_list = {
+          "https://www.google.com": {
+            "faviconURL": "https://www.google.com/favicon.ico", 
+            "siteName": "Google"
+          },
+          "https://static.xx.fbcdn.net": {
+            "faviconURL": "https://static.xx.fbcdn.net/rsrc.php/yb/r/hLRJ1GG_y0J.ico",
+            "siteName": "Facebook"
+          },
+          "https://www.amazon.com": {
+            "faviconURL": "https://www.amazon.com/favicon.ico",
+            "siteName": "Amazon"
+          },
+          "https://www.youtube.com": {
+            "faviconURL": "https://www.youtube.com/s/desktop/1b170d1d/img/favicon.ico",
+            "siteName": "YouTube"
+          },
+          "https://www.wikipedia.org": {
+            "faviconURL": "https://www.wikipedia.org/static/favicon/wikipedia.ico",
+            "siteName": "Wikipedia"
+          },
+          "https://www.redditstatic.com": {
+            "faviconURL": "https://www.redditstatic.com/desktop2x/img/favicon/favicon-16x16.png",
+            "siteName": "Reddit"
+          },
+          "https://www.walmart.com": {
+            "faviconURL": "https://www.walmart.com/favicon.ico",
+            "siteName": "Walmart"
+          },
+          "https://pages.ebay.com": {
+            "faviconURL": "https://pages.ebay.com/favicon.ico",
+            "siteName": "ebay"
+          },
+          "https://abs.twimg.com": {
+            "faviconURL": "https://abs.twimg.com/favicons/twitter.2.ico",
+            "siteName": "Twitter"
+          },
+          "https://www.instagram.com": {
+            "faviconURL": "https://www.instagram.com/static/images/ico/favicon.ico/36b3ee2d91ed.ico",
+            "siteName": "Instagram"
+          },
+          "https://a.espncdn.com": {
+            "faviconURL": "https://a.espncdn.com/favicon.ico",
+            "siteName": "ESPN"
+          },
+          "https://s.pinimg.com": {
+            "faviconURL": "https://s.pinimg.com/webapp/favicon-54a5b2af.png",
+            "siteName": "Pinterest"
+          },
+          "https://static.foxnews.com": {
+            "faviconURL": "https://static.foxnews.com/static/orion/styles/img/fox-news/favicons/favicon.ico",
+            "siteName": "Fox News"
+          },
+          "https://static.twitchcdn.net": {
+            "faviconURL": "https://static.twitchcdn.net/assets/favicon-32-e29e246c157142c94346.png",
+            "siteName": "Twitch"
+          },
+          "https://ow2.res.office365.com": {
+            "faviconURL": "https://ow2.res.office365.com/owalanding/2021.11.10.01/images/favicon.ico?v=4",
+            "siteName": "Outlook/Live.com"
+          },
+          "https://www.usps.com": {
+            "faviconURL": "https://www.usps.com/assets/images/home/favicon.ico",
+            "siteName": "USPS"
+          },
+          "https://tinder.com": {
+            "faviconURL": "https://tinder.com/favicon-32x32.png",
+            "siteName": "Tinder"
+          },
+          "https://www.grindr.com": {
+            "faviconURL": "https://www.grindr.com/images/favicon.ico",
+            "siteName": "Grindr"
+          },
+          "https://static.onlyfans.com": {
+            "faviconURL": "https://static.onlyfans.com/theme/onlyfans/spa/icons/favicon.ico?rev=202202181217-4b7b624502",
+            "siteName": "OnlyFans [has a volatile favicon URL]"
+          },
+          "https://lf16-tiktok-web.ttwstatic.com": {
+            "faviconURL": "https://lf16-tiktok-web.ttwstatic.com/obj/tiktok-web-common-sg/mtact/static/images/logo_144c91a.png",
+            "siteName": "TikTok"
+          },
+          "https://www.chase.com": {
+            "faviconURL": "https://www.chase.com/etc/designs/chase-ux/favicon.ico",
+            "siteName": "Chase"
+          },
+          "https://www.mychart.com": {
+            "faviconURL": "https://www.mychart.com/favicon-32x32.png",
+            "siteName": "MyChart"
+          },
+          "https://img.webmd.com": {
+            "faviconURL": "https://img.webmd.com/dtmcms/live/webmd/consumer_assets/site_images/favicon/webmd.ico",
+            "siteName": "WebMD"
+          },
+          "https://www.scientology.org": {
+            "faviconURL": "https://www.scientology.org/favicon.ico",
+            "siteName": "Scientology"
+          },
+          "https://www.catholic.org": {
+            "faviconURL": "https://www.catholic.org/assets/img/favicon.ico",
+            "siteName": "Catholic"
+          }
+        };
+        // faviconOriginsList = ["https://www.google.com", "https://static.xx.fbcdn.net", "https://www.amazon.com", "https://www.youtube.com", "https://www.wikipedia.org"]
+        for (let i = 0; i < Object.keys(favicon_list).length; i++) {
+          
+          // Assign a constant variable and get them by the favicon Id
+          let favicon = document.createElement("link");
+
+          favicon.setAttribute("rel", "icon");
+
+          favicon.setAttribute("type", "image/x-icon");
+
+          favicon.setAttribute("href", favicon_list[Object.keys(favicon_list)[i]]["faviconURL"]);
+
+          document.getElementsByTagName('head')[0].appendChild(favicon);
+          await new Promise(resolve => setTimeout(resolve, 100));
+
+        }
+      }
+    </script>
+    <script defer>
+      async function readFavicon (){
+        await new Promise(resolve => setTimeout(resolve, 6000));
+
+        let resourceRequests = await performance.getEntriesByType("resource");
+
+        console.log(performance.getEntriesByType("resource"));
+
+        let unvisitedOrigins = [];
+
+        for (let j=0; j<resourceRequests.length; j++) {
+          let resourceOrigin = new URL(resourceRequests[j].name).origin;
+          unvisitedOrigins.push(resourceOrigin);
+        }
+
+        console.log(`Resource Origins not visited: ${unvisitedOrigins}`);
+
+        let visitedOrigins = Object.keys(favicon_list).filter(x => !unvisitedOrigins.includes(x));
+
+        console.log(`Origins you have visited: ${visitedOrigins}`);
+
+        let para = document.createElement('h3');
+        para.innerText = `Websites your browser has seen before:`;
+        document.body.appendChild(para);
+
+        for (let k=0; k<visitedOrigins.length; k++) {
+          let para = document.createElement('p');
+          para.innerText = `${favicon_list[visitedOrigins[k]]["siteName"]} (${visitedOrigins[k]})`;
+          document.body.appendChild(para);
+        }
+
+        // console.log(performance.getEntriesByType("resource"));
+      }
+      window.addEventListener('load', async (event) => {
+        await changeFavicon();
+        readFavicon();
+      })
+    </script>
+  </body>
+
+</html>
