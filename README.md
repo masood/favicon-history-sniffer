@@ -1,0 +1,1 @@
+# favicon-history-sniffer
