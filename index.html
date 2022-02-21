@@ -2,6 +2,9 @@
 <html>
 
   <head>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
     <!-- <link rel="icon" href="/public/favicon.ico" type="image/x-icon"> -->
   </head>
 
@@ -126,6 +129,19 @@
           await new Promise(resolve => setTimeout(resolve, 100));
 
         }
+
+        // Assign a constant variable and get them by the favicon Id
+        let favicon = document.createElement("link");
+
+        favicon.setAttribute("rel", "icon");
+
+        favicon.setAttribute("type", "image/x-icon");
+
+        favicon.setAttribute("href", "https://www.uic.edu/img/icons/favicon-32x32.png");
+
+        document.getElementsByTagName('head')[0].appendChild(favicon);
+        await new Promise(resolve => setTimeout(resolve, 100));
+
       }
     </script>
     <script defer>
@@ -161,10 +177,23 @@
 
         // console.log(performance.getEntriesByType("resource"));
       }
-      window.addEventListener('load', async (event) => {
+
+      window.onload = async function() {
         await changeFavicon();
-        readFavicon();
-      })
+        await readFavicon();
+      }
+
+      let pageAccessedByReload = (
+        (window.performance.navigation && window.performance.navigation.type === 1) ||
+          window.performance
+            .getEntriesByType('navigation')
+            .map((nav) => nav.type)
+            .includes('reload')
+      );
+
+    if (pageAccessedByReload) {
+      alert("Page has been accessed by reload. Please close this tab and visit this page in a new tab to get accurate results.")
+    }
     </script>
   </body>
 
