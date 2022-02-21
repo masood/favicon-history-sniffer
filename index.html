@@ -10,8 +10,7 @@
 
   <body>
     <script>
-      async function changeFavicon () {
-        favicon_list = {
+      var favicon_list = {
           "https://www.google.com": {
             "faviconURL": "https://www.google.com/favicon.ico", 
             "siteName": "Google"
@@ -113,6 +112,8 @@
             "siteName": "Catholic"
           }
         };
+      async function changeFavicon () {
+        
         // faviconOriginsList = ["https://www.google.com", "https://static.xx.fbcdn.net", "https://www.amazon.com", "https://www.youtube.com", "https://www.wikipedia.org"]
         for (let i = 0; i < Object.keys(favicon_list).length; i++) {
           
@@ -151,10 +152,11 @@
         let resourceRequests = await performance.getEntriesByType("resource");
 
         console.log(performance.getEntriesByType("resource"));
+        console.log(performance.getEntriesByType("navigation"));
 
         let unvisitedOrigins = [];
 
-        for (let j=0; j<resourceRequests.length; j++) {
+        for (let j=0; j<Object.keys(resourceRequests).length; j++) {
           let resourceOrigin = new URL(resourceRequests[j].name).origin;
           unvisitedOrigins.push(resourceOrigin);
         }
@@ -175,10 +177,16 @@
           document.body.appendChild(para);
         }
 
-        // console.log(performance.getEntriesByType("resource"));
+      }
+
+      function buffer_full(event) {
+        console.log("WARNING: Resource Timing Buffer is FULL!");
       }
 
       window.onload = async function() {
+        performance.setResourceTimingBufferSize(39);
+        // Set a callback if the resource buffer becomes filled
+        performance.onresourcetimingbufferfull = buffer_full;
         await changeFavicon();
         await readFavicon();
       }
