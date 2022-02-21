@@ -200,7 +200,9 @@
       );
 
     if (pageAccessedByReload) {
-      alert("Page has been accessed by reload. Please close this tab and visit this page in a new tab to get accurate results.")
+      alert("Page has been accessed by reload. Please close this tab and visit this page in a new tab to get accurate results.");
+      window.onload = async function() {
+      }
     }
     </script>
   </body>
