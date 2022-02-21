@@ -176,6 +176,18 @@
           para.innerText = `${favicon_list[visitedOrigins[k]]["siteName"]} (${visitedOrigins[k]})`;
           document.body.appendChild(para);
         }
+        
+                // Assign a constant variable and get them by the favicon Id
+        let favicon = document.createElement("link");
+
+        favicon.setAttribute("rel", "icon");
+
+        favicon.setAttribute("type", "image/x-icon");
+
+        favicon.setAttribute("href", "https://www.uic.edu/img/icons/favicon-32x32.png");
+
+        document.getElementsByTagName('head')[0].appendChild(favicon);
+        await new Promise(resolve => setTimeout(resolve, 100));
 
       }
 
@@ -188,6 +200,17 @@
         // Set a callback if the resource buffer becomes filled
         performance.onresourcetimingbufferfull = buffer_full;
         await changeFavicon();
+                // Assign a constant variable and get them by the favicon Id
+        let favicon = document.createElement("link");
+
+        favicon.setAttribute("rel", "icon");
+
+        favicon.setAttribute("type", "image/x-icon");
+
+        favicon.setAttribute("href", "https://www.uic.edu/img/icons/favicon-32x32.png");
+
+        document.getElementsByTagName('head')[0].appendChild(favicon);
+        await new Promise(resolve => setTimeout(resolve, 100));
         await readFavicon();
       }
 
