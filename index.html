@@ -5,7 +5,6 @@
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
     <meta http-equiv="Pragma" content="no-cache" />
     <meta http-equiv="Expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
-    <link rel="icon" href="/favicon-history-sniffer/favicon.ico" type="image/x-icon">
   </head>
 
   <body>
@@ -131,18 +130,6 @@
 
         }
 
-        // Assign a constant variable and get them by the favicon Id
-        let favicon = document.createElement("link");
-
-        favicon.setAttribute("rel", "icon");
-
-        favicon.setAttribute("type", "image/x-icon");
-
-        favicon.setAttribute("href", "https://masood.github.io/favicon-history-sniffer/favicon.ico");
-
-        document.getElementsByTagName('head')[0].appendChild(favicon);
-        await new Promise(resolve => setTimeout(resolve, 100));
-
       }
     </script>
     <script defer>
@@ -150,6 +137,14 @@
         await new Promise(resolve => setTimeout(resolve, 6000));
 
         let resourceRequests = await performance.getEntriesByType("resource");
+        
+        let replaceFaviconText = `
+        <link rel="apple-touch-icon" sizes="180x180" href="/favicon-history-sniffer/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-history-sniffer/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-history-sniffer/favicon-16x16.png">
+        <link rel="manifest" href="/site.webmanifest">`;
+        
+        document.getElementsByTagName('head')[0].innerHTML = replaceFaviconText;
 
         console.log(performance.getEntriesByType("resource"));
         console.log(performance.getEntriesByType("navigation"));
@@ -176,18 +171,6 @@
           para.innerText = `${favicon_list[visitedOrigins[k]]["siteName"]} (${visitedOrigins[k]})`;
           document.body.appendChild(para);
         }
-        
-                // Assign a constant variable and get them by the favicon Id
-        let favicon = document.createElement("link");
-
-        favicon.setAttribute("rel", "icon");
-
-        favicon.setAttribute("type", "image/x-icon");
-
-        favicon.setAttribute("href", "https://masood.github.io/favicon-history-sniffer/favicon.ico");
-
-        document.getElementsByTagName('head')[0].appendChild(favicon);
-        await new Promise(resolve => setTimeout(resolve, 100));
 
       }
 
@@ -199,18 +182,7 @@
         performance.setResourceTimingBufferSize(39);
         // Set a callback if the resource buffer becomes filled
         performance.onresourcetimingbufferfull = buffer_full;
-        await changeFavicon();
-                // Assign a constant variable and get them by the favicon Id
-        let favicon = document.createElement("link");
 
-        favicon.setAttribute("rel", "icon");
-
-        favicon.setAttribute("type", "image/x-icon");
-
-        favicon.setAttribute("href", "https://masood.github.io/favicon-history-sniffer/favicon.ico");
-
-        document.getElementsByTagName('head')[0].appendChild(favicon);
-        await new Promise(resolve => setTimeout(resolve, 100));
         await readFavicon();
       }
 
@@ -225,6 +197,13 @@
     if (pageAccessedByReload) {
       alert("Page has been accessed by reload. Please close this tab and visit this page in a new tab to get accurate results.");
       window.onload = async function() {
+        let replaceFaviconText = `
+        <link rel="apple-touch-icon" sizes="180x180" href="/favicon-history-sniffer/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-history-sniffer/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-history-sniffer/favicon-16x16.png">
+        <link rel="manifest" href="/site.webmanifest">`;
+        
+        document.getElementsByTagName('head')[0].innerHTML = replaceFaviconText;
       }
     }
     </script>
