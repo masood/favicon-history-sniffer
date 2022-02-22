@@ -178,10 +178,10 @@
       }
 
       window.onload = async function() {
-        performance.setResourceTimingBufferSize(39);
+        performance.setResourceTimingBufferSize(41);
         // Set a callback if the resource buffer becomes filled
         performance.onresourcetimingbufferfull = buffer_full;
-
+        await changeFavicon();
         await readFavicon();
       }
 
