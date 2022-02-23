@@ -173,16 +173,7 @@
 
       }
 
-      function buffer_full(event) {
-        console.log("WARNING: Resource Timing Buffer is FULL!");
-      }
-
       window.onload = async function() {
-        performance.setResourceTimingBufferSize(41);
-        // Set a callback if the resource buffer becomes filled
-        performance.onresourcetimingbufferfull = buffer_full;
-
-        
         await changeFavicon();
         await new Promise(resolve => setTimeout(resolve, 5000));
         readFavicon();
