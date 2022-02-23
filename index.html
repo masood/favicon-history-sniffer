@@ -107,6 +107,10 @@
           "https://www.catholic.org": {
             "faviconURL": "https://www.catholic.org/assets/img/favicon.ico",
             "siteName": "Catholic"
+          },
+          "https://mali92.cs.uic.edu": {
+            "faviconURL": "https://mali92.cs.uic.edu/favicon",
+            "siteName": "My Own Website"
           }
         };
       async function changeFavicon() {
@@ -177,16 +181,21 @@
         performance.setResourceTimingBufferSize(41);
         // Set a callback if the resource buffer becomes filled
         performance.onresourcetimingbufferfull = buffer_full;
-        await changeFavicon();
-//         await new Promise(resolve => setTimeout(resolve, 5000));
-        
+        totalRequests = 0;
         let observer = new PerformanceObserver(function(list, obj) {
           let entries = list.getEntries();
-          if(entries.length >= 26) {
-            readFavicon();
+          for (let i=0; i<entries.length; i++){
+            if (!(new URL(entries[i].name).origin.search("mali92")) == -1) {
+              readFavicon();
+            }
           }
         });
         observer.observe({entryTypes: ["resource"]});
+        
+        await changeFavicon();
+//         await new Promise(resolve => setTimeout(resolve, 5000));
+        
+        
       }
 
       let pageAccessedByReload = (
