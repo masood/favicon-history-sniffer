@@ -181,19 +181,11 @@
         performance.setResourceTimingBufferSize(41);
         // Set a callback if the resource buffer becomes filled
         performance.onresourcetimingbufferfull = buffer_full;
-        totalRequests = 0;
-        let observer = new PerformanceObserver(function(list, obj) {
-          let entries = list.getEntries();
-          for (let i=0; i<entries.length; i++){
-            if (!(new URL(entries[i].name).origin.search("mali92")) == -1) {
-              readFavicon();
-            }
-          }
-        });
-        observer.observe({entryTypes: ["resource"]});
+
         
         await changeFavicon();
-//         await new Promise(resolve => setTimeout(resolve, 5000));
+        await new Promise(resolve => setTimeout(resolve, 5000));
+        readFavicon();
         
         
       }
