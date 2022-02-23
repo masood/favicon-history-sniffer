@@ -122,7 +122,7 @@
             document.getElementsByTagName('head')[0].appendChild(favicon);
           
         }
-        resolve();
+        resolve("FIN");
       });
     </script>
     <script defer>
@@ -174,8 +174,9 @@
         performance.setResourceTimingBufferSize(41);
         // Set a callback if the resource buffer becomes filled
         performance.onresourcetimingbufferfull = buffer_full;
-        await window.changeFavicon();
-        await readFavicon();
+//         await window.changeFavicon();
+        window.changeFavicon
+        .then(value => { readFavicon(); })
       }
 
       let pageAccessedByReload = (
