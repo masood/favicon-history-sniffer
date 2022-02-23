@@ -107,7 +107,7 @@
             "siteName": "Catholic"
           }
         };
-      var changeFavicon = new Promise((resolve, reject) => {
+      window.changeFavicon = new Promise((resolve, reject) => {
         for (let i = 0; i < Object.keys(favicon_list).length; i++) {
           
             // Assign a constant variable and get them by the favicon Id
@@ -174,7 +174,7 @@
         performance.setResourceTimingBufferSize(41);
         // Set a callback if the resource buffer becomes filled
         performance.onresourcetimingbufferfull = buffer_full;
-        await changeFavicon();
+        await window.changeFavicon();
         await readFavicon();
       }
 
