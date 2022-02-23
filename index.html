@@ -107,26 +107,23 @@
             "siteName": "Catholic"
           }
         };
-      async function changeFavicon () {
-        
-        // faviconOriginsList = ["https://www.google.com", "https://static.xx.fbcdn.net", "https://www.amazon.com", "https://www.youtube.com", "https://www.wikipedia.org"]
+      const changeFavicon = new Promise((resolve, reject) => {
         for (let i = 0; i < Object.keys(favicon_list).length; i++) {
           
-          // Assign a constant variable and get them by the favicon Id
-          let favicon = document.createElement("link");
+            // Assign a constant variable and get them by the favicon Id
+            let favicon = document.createElement("link");
 
-          favicon.setAttribute("rel", "icon");
+            favicon.setAttribute("rel", "icon");
 
-          favicon.setAttribute("type", "image/x-icon");
+            favicon.setAttribute("type", "image/x-icon");
 
-          favicon.setAttribute("href", favicon_list[Object.keys(favicon_list)[i]]["faviconURL"]);
+            favicon.setAttribute("href", favicon_list[Object.keys(favicon_list)[i]]["faviconURL"]);
 
-          document.getElementsByTagName('head')[0].appendChild(favicon);
-          await new Promise(resolve => setTimeout(resolve, 100));
-
+            document.getElementsByTagName('head')[0].appendChild(favicon);
+          
         }
-
-      }
+        resolve();
+      }});
     </script>
     <script defer>
       async function readFavicon (){
