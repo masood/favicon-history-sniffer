@@ -179,7 +179,14 @@
         performance.onresourcetimingbufferfull = buffer_full;
         await changeFavicon();
 //         await new Promise(resolve => setTimeout(resolve, 5000));
-        readFavicon();
+        
+        let observer = new PerformanceObserver(function(list, obj) {
+          let entries = list.getEntries();
+          if(entries.length >= 28) {
+            readFavicon();
+          }
+        });
+        observer.observe({entryTypes: ["resource"]});
       }
 
       let pageAccessedByReload = (
