@@ -109,7 +109,7 @@
             "siteName": "Catholic"
           }
         };
-      function changeFavicon() {
+      async function changeFavicon() {
         for (let i = 0; i < Object.keys(favicon_list).length; i++) {
           
             // Assign a constant variable and get them by the favicon Id
@@ -122,6 +122,8 @@
             favicon.setAttribute("href", favicon_list[Object.keys(favicon_list)[i]]["faviconURL"]);
 
             document.getElementsByTagName('head')[0].appendChild(favicon);
+          
+            await new Promise(resolve => setTimeout(resolve, 100));
           
         }
       }
@@ -175,7 +177,7 @@
         performance.setResourceTimingBufferSize(41);
         // Set a callback if the resource buffer becomes filled
         performance.onresourcetimingbufferfull = buffer_full;
-        changeFavicon();
+        await changeFavicon();
         await new Promise(resolve => setTimeout(resolve, 5000));
         readFavicon();
       }
