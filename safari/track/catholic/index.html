@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta http-equiv="cache-control" content="no-store" />
+    <meta http-equiv="expires" content="0">
+    <link rel="icon" href="https://www.catholic.org/assets/img/favicon.ico" type="image/x-icon">
+  </head>
+
+  <body>
+    <script>
+        window.addEventListener('load', async (event) => {
+          // var pathList = ['google', 'amazon', 'youtube', 'wikipedia', 'reddit', 'walmart', 'ebay', 'twitter', 'espn', 'pinterest', 'foxnews', 'microsoft', 'usps', 'tinder', 'grindr', 'tiktok', 'chase', 'webmd', 'scientology', 'catholic', 'canva'];
+          var pathList = ['google', 'amazon', 'catholic', 'webmd', 'grindr']
+          var id = (new URL(window.location.href)).searchParams.get("id")
+          if (!(id)) {
+            id = '';
+          }
+          var pathname = window.location.pathname.split('/');
+          var whereAmI = pathname[pathname.length - 1];
+          let currentDomainIndex = pathList.indexOf(whereAmI);
+          
+          await new Promise(resolve => setTimeout(resolve, 300));
+          let resourceRequests = performance.getEntriesByType("resource");
+
+          let found = 1;
+
+          for (let j=0; j<Object.keys(resourceRequests).length; j++) {
+            let resourceOrigin = new URL(resourceRequests[j].name);
+            if (resourceRequests[j].name.includes(whereAmI)) {
+              found = 0;
+            }
+          }
+          if (currentDomainIndex == (pathList.length - 1)) {
+            window.location.href = `https://${window.location.hostname}/safari?id=${id}${found}`
+          } else {
+            window.location.href = `https://${window.location.hostname}/safari/track/${pathList[currentDomainIndex+1]}?id=${id}${found}`
+          }
+
+
+        });
+    </script>
+  </body>
+
+</html>
