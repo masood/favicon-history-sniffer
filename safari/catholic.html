@@ -17,7 +17,7 @@
             id = '';
           }
           var pathname = window.location.pathname.split('/');
-          var whereAmI = pathname[pathname.length - 1];
+          var whereAmI = pathname[pathname.length - 1].split('.')[0];
           let currentDomainIndex = pathList.indexOf(whereAmI);
           
           await new Promise(resolve => setTimeout(resolve, 300));
