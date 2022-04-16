@@ -26,9 +26,9 @@
             }
           }
           if (currentDomainIndex == (pathList.length - 1)) {
-            window.location.href = `https://${window.location.hostname}/safari?id=${id}${found}`
+            window.location.href = `https://${window.location.hostname}/safari/index.html?id=${id}${found}`
           } else {
-            window.location.href = `https://${window.location.hostname}/safari/track/${pathList[currentDomainIndex+1]}?id=${id}${found}`
+            window.location.href = `https://${window.location.hostname}/safari/track/${pathList[currentDomainIndex+1]}/index.html?id=${id}${found}`
           }
 
         });
