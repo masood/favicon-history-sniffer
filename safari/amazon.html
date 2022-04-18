@@ -10,6 +10,9 @@
         window.addEventListener('load', async (event) => {
           var pathList = ['amazon', 'catholic', 'webmd', 'grindr'];
           var id = (new URL(window.location.href)).searchParams.get("id");
+          if (!(id)) {
+            id = '';
+          }
           var pathname = window.location.pathname.split('/');
           var whereAmI = pathname[pathname.length - 1].split('.')[0];
           let currentDomainIndex = pathList.indexOf(whereAmI);
